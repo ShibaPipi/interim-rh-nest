@@ -1,0 +1,10 @@
+# Add files here to ignore them from prettier formatting
+
+**/dist/*
+.husky
+**/public/**
+**/node_modules/**
+pnpm-lock.yaml
+
+**/*.svg
+**/*.sh
