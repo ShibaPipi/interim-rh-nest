@@ -46,14 +46,16 @@ export class User {
     @JoinColumn({ name: 'client_id' })
     client: Client
 
-    @ManyToMany('Location', (location: Location) => location.users)
+    @ManyToMany('Location', (location: Location) => location.users, { cascade: true })
     @JoinTable({
         name: 'location_user',
         joinColumn: {
-            name: 'user_id'
+            name: 'user_id',
+            referencedColumnName: 'id'
         },
         inverseJoinColumn: {
-            name: 'location_id'
+            name: 'location_id',
+            referencedColumnName: 'id'
         }
     })
     locations: Location[]

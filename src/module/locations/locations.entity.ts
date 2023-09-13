@@ -6,7 +6,6 @@ import {
     UpdateDateColumn,
     ManyToOne,
     ManyToMany,
-    JoinTable,
     JoinColumn,
     RelationId
 } from 'typeorm'
@@ -39,14 +38,5 @@ export class Location {
     client: Client
 
     @ManyToMany('User', (user: User) => user.locations)
-    @JoinTable({
-        name: 'location_user',
-        joinColumn: {
-            name: 'location_id'
-        },
-        inverseJoinColumn: {
-            name: 'user_id'
-        }
-    })
     users: User[]
 }

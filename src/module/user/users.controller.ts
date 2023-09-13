@@ -1,32 +1,26 @@
-import { Controller, Delete, Param, Get, HttpCode, HttpStatus } from '@nestjs/common'
+import { Controller, Delete, Param, Get, HttpCode, HttpStatus, Post, Body } from '@nestjs/common'
 import { UsersService } from './users.service'
 
 @Controller('api/v1/users')
 export class UsersController {
-    constructor(private readonly userService: UsersService) {}
+    constructor(private readonly usersService: UsersService) {}
 
     @Get(':id')
     async show(@Param('id') id: number) {
-        return await this.userService.findOne(id)
+        return await this.usersService.findOne(id)
     }
 
     @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
     async destroy(@Param('id') id: number) {
-        await this.userService.remove(id)
+        await this.usersService.remove(id)
     }
 
-    // @Post(':id/locations')
-    // @HttpCode(201)
-    // storeLocations(@Param('id') id: string, @Body() request: { locations: string[] }) {
-    //     const user = this.authService.getUserById(id)
-
-    //     if (!user) throw new NotFoundException('User does not exist.')
-
-    //     // 更新用户的位置
-    //     user.locations = request.locations
-    //     this.userService.updateUser(user)
-    // }
+    @Post(':id/locations')
+    @HttpCode(201)
+    async storeLocations(@Param('id') id: number, @Body() request: { locations: number[] }) {
+        await this.usersService.storeLocations(id, request.locations)
+    }
 
     // @Post(':id/password')
     // storePassword(
