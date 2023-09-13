@@ -10,7 +10,7 @@ export class UsersService {
         @InjectRepository(User)
         private usersRepository: Repository<User>,
         @InjectRepository(Location)
-        private locationsRepository: Repository<Location>,
+        private locationsRepository: Repository<Location>
     ) {}
 
     async findOne(id: number): Promise<User> {
