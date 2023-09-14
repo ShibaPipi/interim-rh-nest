@@ -22,25 +22,11 @@ export class UsersController {
         await this.usersService.storeLocations(id, request.locations)
     }
 
-    // @Post(':id/password')
-    // storePassword(
-    //   @Param('id') id: string,
-    //   @Body() request: { password: string },
-    // ) {
-    //   const user = this.authService.getUserById(id);
-
-    //   if (!user) {
-    //     // 处理用户不存在的逻辑
-    //     return { message: 'User does not exist.' };
-    //   }
-
-    //   // 更新用户密码
-    //   user.password = request.password;
-    //   this.authService.updateUser(user);
-
-    //   // 返回成功响应
-    //   return { statusCode: 201 };
-    // }
+    @Post(':id/password')
+    @HttpCode(HttpStatus.ACCEPTED)
+    async storePassword(@Param('id') id: number, @Body() request: { password: string }) {
+        await this.usersService.changePassword(id, request.password)
+    }
 
     // @Get('locations')
     // showLocations() {
